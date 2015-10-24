@@ -6,13 +6,13 @@
     <param-value>/WEB-INF/applicationContext.xml</param-value>
   </context-param>
   <servlet>
-    <servlet-name>rest</servlet-name>
+    <servlet-name>api</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>rest</servlet-name>
-    <url-pattern>/rest/*</url-pattern>
+    <servlet-name>api</servlet-name>
+    <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

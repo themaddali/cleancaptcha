@@ -36,7 +36,7 @@ public class RandomQuestionDAO {
 		try{
 			//Connect to MongoDB
 			mongoClient = new MongoClient("localhost", 27017);
-			dbName = mongoClient.getDB("Captcha2dotO");
+			dbName = mongoClient.getDB("cleancaptcha");
 			prQnCollections = dbName.getCollection("publicRandomQuestions");
 			companyInfoCollection = dbName.getCollection("companyInfo");
 			privateQuestionCollection = dbName.getCollection("privateRandomQuestions");

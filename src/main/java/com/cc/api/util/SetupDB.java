@@ -62,12 +62,9 @@ public class SetupDB {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		
-		SetupDB setupDB = new SetupDB();
-		
+		SetupDB setupDB = new SetupDB();		
 		MongoClient mongoClient;
-		DB dbName;
-		
-		
+		DB dbName;	
 		
 		try{
 			mongoClient = new MongoClient("localhost",27017);
@@ -77,12 +74,12 @@ public class SetupDB {
 			//Create Companies			
 			DBCollection companyCollection = dbName.getCollection("companyInfo");
 			
-//			List<CompanyInfoDTO> companyInfoDTOList = setupDB.readCompanyExcelData();
-//			
-//			for(CompanyInfoDTO companyInfoDto : companyInfoDTOList){
-//				BasicDBObject companyInfo = setupDB.putCompanyInfo(companyInfoDto.getCompanyCode(), companyInfoDto.getCompany(), companyInfoDto.getPhone(), companyInfoDto.getAuthKey());
-//				companyCollection.insert(companyInfo);
-//			}
+			List<CompanyInfoDTO> companyInfoDTOList = setupDB.readCompanyExcelData();
+			
+			for(CompanyInfoDTO companyInfoDto : companyInfoDTOList){
+				BasicDBObject companyInfo = setupDB.putCompanyInfo(companyInfoDto.getCompanyCode(), companyInfoDto.getCompany(), companyInfoDto.getPhone(), companyInfoDto.getAuthKey());
+				companyCollection.insert(companyInfo);
+			}
 			
 			DBCursor companyInfoCursor = companyCollection.find();
 			while (companyInfoCursor.hasNext()) {				
@@ -93,12 +90,12 @@ public class SetupDB {
 			//Create Private Random Questions for each Customer
 			DBCollection privateQuestionCollection = dbName.getCollection("privateRandomQuestions");
 			
-//			List<PrivateQuestionDTO> privateQuestionDTOList = setupDB.readPrivateQuestionData();
-//			
-//			for(PrivateQuestionDTO privateQuestionDto:privateQuestionDTOList){
-//				BasicDBObject privateQuestion = setupDB.createPrivateQuestion(privateQuestionDto.getQuestionID(), privateQuestionDto.getQuestion(), privateQuestionDto.getAnswer(),privateQuestionDto.getCompanyCode());
-//				privateQuestionCollection.insert(privateQuestion);
-//			}
+			List<QuestionAnswerDTO> privateQuestionDTOList = setupDB.readPrivateQuestionData();
+			
+			for(QuestionAnswerDTO privateQuestionDto:privateQuestionDTOList){
+				BasicDBObject privateQuestion = setupDB.createPrivateQuestion(privateQuestionDto.getQuestionId(), privateQuestionDto.getQuestion(), privateQuestionDto.getAnswer(),privateQuestionDto.getCompanyCode());
+				privateQuestionCollection.insert(privateQuestion);
+			}
 			
 			DBCursor privateQuestionCursor = privateQuestionCollection.find();
 			while(privateQuestionCursor.hasNext()){
@@ -109,12 +106,12 @@ public class SetupDB {
 			//create public Random Questions
 			DBCollection publicQuestionCollection = dbName.getCollection("publicRandomQuestions");
 			
-//			List<PublicRandomQuestionDTO> publicQuestionDTOList = setupDB.readPublicQuestionData();
-//			
-//			for(PublicRandomQuestionDTO publicQuestionDto: publicQuestionDTOList){
-//				BasicDBObject publicQuestion = setupDB.createPublicQuestions(publicQuestionDto.getQuestionId(), publicQuestionDto.getQuestion(), publicQuestionDto.getAnswer());
-//				publicQuestionCollection.insert(publicQuestion);
-//			}
+			List<QuestionAnswerDTO> publicQuestionDTOList = setupDB.readPublicQuestionData();
+			
+			for(QuestionAnswerDTO publicQuestionDto: publicQuestionDTOList){
+				BasicDBObject publicQuestion = setupDB.createPublicQuestions(publicQuestionDto.getQuestionId(), publicQuestionDto.getQuestion(), publicQuestionDto.getAnswer());
+				publicQuestionCollection.insert(publicQuestion);
+			}
 			
 //			long maxNumber = publicQuestionCollection.getCount();
 //			
@@ -258,7 +255,27 @@ public class SetupDB {
             rowIterator.next();
             while (rowIterator.hasNext()){
             	QuestionAnswerDTO publicQuestionDto = new QuestionAnswerDTO();
-                Row row = rowIterator.next();                
+            	Row row = rowIterator.next();  
+                
+                //For each row, iterate through each columns
+                Iterator<Cell> cellIterator = row.cellIterator();
+                
+                while(cellIterator.hasNext())
+                {
+                    Cell cell = cellIterator.next();
+                    //This will change all Cell Types to String
+                    cell.setCellType(Cell.CELL_TYPE_STRING);
+                    switch(cell.getCellType()) 
+                    {
+                        case Cell.CELL_TYPE_BOOLEAN:
+                            break;
+                        case Cell.CELL_TYPE_NUMERIC:
+                            break;
+                        case Cell.CELL_TYPE_STRING:
+                        	break;
+                    }
+                }
+                                
                 publicQuestionDto.setQuestionId(row.getCell(0).getStringCellValue());
                 publicQuestionDto.setQuestion(row.getCell(1).getStringCellValue());
                 publicQuestionDto.setAnswer(row.getCell(2).getStringCellValue());
