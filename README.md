@@ -11,9 +11,12 @@ Now you might wonder, is this 100% safe, I don’t think so. But do we need to b
 Some of the  questions you are seeing are courtesy from various feeds, When you these, please do thank them.
 
 Web Link: http://cleancaptcha.com/
+
 Usage: http://cleancaptcha.com/#usage
+
 Pricing: http://cleancaptcha.com/#pricing
+
 Examples: http://cleancaptcha.com/#example
 
---------------------------------0-------------------------------------0----------------------------------------0----------------
+-------------------------------------------------------------------------------------------------------------------------------
 
