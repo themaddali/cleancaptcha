@@ -31,10 +31,10 @@ All_RSS=['http://chicagotribune.feedsportal.com/c/34253/f/622872/index.rss',
          'http://www.podquiz.com/podquiz.rss']
 
 writter = csv.writer(open('cleanCap.csv', 'wb', buffering=0))
-counter =1
-#writter.writerows([
-#            ('Headline', 'Answer', 'TimeStamp', 'Source'),
-#           ])
+counter = 000;
+writter.writerows([
+            ('quiestionId','question', 'answer', 'timestamp', 'credits'),
+           ])
 
 # function to get the current time
 current_time_millis = lambda: int(round(time.time() * 1000))
@@ -51,7 +51,7 @@ def post_is_in_file(title):
 # return true if the title is in the database with a timestamp > limit
 def post_is_in_file_with_old_timestamp(title):
     currentfeeds = csv.reader(open('cleanCap.csv', 'rb'))
-    for currenttitle,answer,time,link in currentfeeds:
+    for id,currenttitle,answer,time,link in currentfeeds:
             if time in currenttitle:
                 ts = long(time)
                 if current_timestamp - ts > limit:
@@ -63,7 +63,7 @@ def break_into_question(title):
     #Eliminate classic RSS keywords
     title = title.replace('CORRECTION','')
     title = title.replace('UPDATE','')
-    #Look for camelcase to idetify a nown
+    #Look for CamelCase to idetify a noun
     #Dont want the first word to be missing
     splitquestion = title.split(' ',1);
     remainingqustion = str(splitquestion[1]).split()
@@ -79,11 +79,13 @@ def break_into_question(title):
             answer = eachword
             fillblank = ''.ljust(len(answer),'*')
             title = title.replace(answer,fillblank)
+            global counter;
+            counter += 1
             writter.writerows([
-                (title, answer, str(current_timestamp), url),
+                ('qid'+str(counter),title, answer, str(current_timestamp), url),
                 ])
             break;
-        
+
 
 def go_for_data(url):
     # get the feed data from the url
