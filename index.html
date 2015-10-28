@@ -142,14 +142,14 @@
 							<i class="ion-aperture"></i>
 							<h3>Subtle</h3>
 							Blends right into your website. Doesnt come off like an 'odd man out'
-							box.
+							box. Use your own CSS.
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<div class="services-wrapper">
 							<i class="ion-university"></i>
 							<h3>Specially Made Questions</h3>
-							Intelligent learning engiles updates the questions pool frequently to
+							Intelligent learning engine updates the questions pool frequently to
 							serve fresh captcha everytime.
 						</div>
 					</div>
@@ -330,14 +330,19 @@
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 custom regular">
 						<div class="work-wrapper">
-							<h4>Ask for a new Captcha (REST - GET)</h4>
+							<h4>Ask for a new Captcha (REST - POST)</h4>
 							<div style="display:none">
 								<div id="register-get">
 									Make an AJAX call from your website / page / blog directly to our server.
 									<br />
-									GET Call:
+									Public POST Call:
 									<code>
-										http://cleancaptcha.com/api/CleanCaptcha/rest/prquestion
+										http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha
+									</code>
+									<br />
+									Custom POST Call:
+									<code>
+										http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=validauthcode
 									</code>
 									<br />
 									Response:
@@ -345,7 +350,6 @@
 										{
 										questionId: "qid002"
 										question: "How many months in a year?"
-										answer: null
 										status: "Fail"
 										}
 									</code>
@@ -379,7 +383,7 @@
 									<br />
 									POST Call:
 									<code>
-										http://cleancaptcha.com/api/CleanCaptcha/rest/validateprquestion
+										http://www.cleancaptcha.com/CleanCaptcha/api/validateResponse?questionId=questionid&answer=useranswer
 									</code>
 									<br />
 									Payload:
@@ -395,7 +399,6 @@
 										{
 										questionId: "qid002" // New Question ID
 										question: "How many months in a year?" // New Question to Ask
-										answer: null
 										status: "Fail"
 										}
 									</code>
@@ -451,7 +454,7 @@
 										<div id="public-question" data-qid="-">
 											Here is a Question
 										</div>
-										<input type="text" autofocus autocomplete="off" id="public-response" placeholder="Response Here" required/>
+										<input type="text" autocomplete="off" id="public-response" placeholder="Response Here" required/>
 									</form>
 									<div class="pricing-footer">
 										<a id="public-validate" class="btn button-custom btn-custom-one">Validate</a>
