@@ -8,7 +8,7 @@ $(document).ready(function() {
 		var $anchor = $(this);
 		$('html, body').stop().animate({
 			scrollTop : $($anchor.attr('href')).offset().top
-		}, 1200, 'easeInOutExpo');
+		}, 1400, 'easeInOutExpo');
 		event.preventDefault();
 	});
 
@@ -124,7 +124,7 @@ $(document).ready(function() {
 			 				$('#public-question').text(data.question);
 			 				$('#public-response').val('');
 		 					$('#public-response-message').removeClass('red').removeClass('green').text('');
-		 				}, 3000);
+		 				}, 1000);
 					}
 					else {
 						$('#public-response-message').text('Hello Human Being!!!').addClass('green');
@@ -141,7 +141,7 @@ $(document).ready(function() {
 							  });
 			 				$('#public-response').val('');
 		 					$('#public-response-message').removeClass('red').removeClass('green').text('');
-		 				}, 3000);
+		 				}, 1000);
 					}
 				}
 		  	 });
