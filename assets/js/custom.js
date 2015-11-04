@@ -89,15 +89,20 @@ $(document).ready(function() {
 	
 	//Custom Question
 	$.ajax({
-		    //Comapny Auth code  = 30eae1443ed6468f9c7525e0a338bbabccomp001 // Use yours here
-			url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=30eae1443ed6468f9c7525e0a338bbabccomp001',
+		    //Comapny Auth code  = e5b0597ebdec4794b3ecd610429082abccomp001 // Use yours here
+			url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=e5b0597ebdec4794b3ecd610429082abccomp001',
 			type : 'POST',
 			async : 'async',
 			contentType : "application/json",
 			success : function(data) {
+				if (data.error){
+					$('#custom-response-message').text(data.error).addClass('red');
+				}
+				else {
 					$('#custom-question').data('qid',data.questionId);
 		 			$('#custom-question').text(data.question);
 				}
+			}
 		});
 		
 		$("#public-validate").keyup(function (e) {
@@ -146,6 +151,42 @@ $(document).ready(function() {
 				}
 		  	 });
 		   }
+		});
+		
+		$('#newpublic').click(function(){
+			$('#public-response').val('');
+		 	$('#public-response-message').removeClass('red').removeClass('green').text('');
+			$.ajax({
+					url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha',
+					type : 'POST',
+					async : 'async',
+					contentType : "application/json",
+					success : function(data) {
+							$('#public-question').data('qid',data.questionId);
+				 			$('#public-question').text(data.question);
+						}
+				  });
+		});
+		
+		$('#newprivate').click(function(){
+			$.ajax({
+				//Comapny Auth code  = e5b0597ebdec4794b3ecd610429082abccomp001 // Use yours here
+				url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=e5b0597ebdec4794b3ecd610429082abccomp001',
+				type : 'POST',
+				async : 'async',
+				contentType : "application/json",
+				success : function(data) {
+				if (data.error){
+					$('#custom-response-message').text(data.error).addClass('red');
+				}
+				else {
+					$('#custom-question').data('qid',data.questionId);
+		 			$('#custom-question').text(data.question);
+				}
+			}
+			  });
+			$('#custom-response').val('');
+			$('#custom-response-message').removeClass('red').removeClass('green').text('');
 		});
 		
 		//Register:
@@ -200,7 +241,7 @@ $(document).ready(function() {
 		if ($('#custom-form').valid()){
 			var userresponse = $('#custom-response').val();
 		    var questionid = $('#custom-question').data("qid");
-		    var Auth_code  = '30eae1443ed6468f9c7525e0a338bbabccomp001'; // Use yours here
+		    var Auth_code  = 'e5b0597ebdec4794b3ecd610429082abccomp001'; // Use yours here
 		$.ajax({
 			url : 'http://www.cleancaptcha.com/CleanCaptcha/api/validateResponse?companyAuthCode='+Auth_code+'&questionId='+questionid+'&answer='+userresponse,
 			type : 'POST',
@@ -224,15 +265,20 @@ $(document).ready(function() {
 						$('#custom-response-message').text('Hello Human Being!!!').addClass('green');
 						setTimeout(function(){
 							$.ajax({
-								//Comapny Auth code  = 30eae1443ed6468f9c7525e0a338bbabccomp001 // Use yours here
-								url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=30eae1443ed6468f9c7525e0a338bbabccomp001',
+								//Comapny Auth code  = e5b0597ebdec4794b3ecd610429082abccomp001 // Use yours here
+								url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=e5b0597ebdec4794b3ecd610429082abccomp001',
 								type : 'POST',
 								async : 'async',
 								contentType : "application/json",
 								success : function(data) {
+									if (data.error){
+										$('#custom-response-message').text(data.error).addClass('red');
+									}
+									else {
 										$('#custom-question').data('qid',data.questionId);
 							 			$('#custom-question').text(data.question);
 									}
+								}
 							  });
 			 				$('#custom-response').val('');
 		 					$('#custom-response-message').removeClass('red').removeClass('green').text('');
