@@ -176,6 +176,21 @@ section {
 	font-size: 60px;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: rgb(137, 136, 24);
+    border-color: rgb(137, 136, 24);
+   }
+
+.dropdown-menu {
+	border-color: rgb(137, 136, 24);
+	border-radius: 0px;
+	float: none;
+	position: inherit
+} 
+
+
+
 /*============================
  PRICING SECTION STYLES
  ==============================*/

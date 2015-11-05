@@ -83,14 +83,32 @@ $(document).ready(function() {
 			contentType : "application/json",
 			success : function(data) {
 					$('#public-question').data('qid',data.questionId);
-		 			$('#public-question').text(data.question);
 				}
 		});
 	
-	//Custom Question
+	//Auth Keys. Use your once you register.
+	var Active_Auth = 'a43daf80b4004386894270c771ee3acarscomp001';
+	$('#private-cars').click(function(){
+			Active_Auth = 'a43daf80b4004386894270c771ee3acarscomp001';
+			$('#newprivate').trigger('click');
+			$('.dropdown-toggle').html(' Category : Cars '+ '<span class="caret"></span>');
+		});
+		
+		$('#private-capitals').click(function(){
+			Active_Auth = '3fb3abcb2f2d4bec8d3eb6b2a894cecapitalcomp002';
+			$('#newprivate').trigger('click');
+			$('.dropdown-toggle').html(' Category : Capitals '+ '<span class="caret"></span>');
+		});
+		
+		$('#private-ceos').click(function(){
+			Active_Auth = 'a43daf80b4004386894270c771ee3acarscomp001';
+			$('#newprivate').trigger('click');
+			$('.dropdown-toggle').html(' Category : CEOs '+ '<span class="caret"></span>');
+		});
+
+	
 	$.ajax({
-		    //Comapny Auth code  = e5b0597ebdec4794b3ecd610429082abccomp001 // Use yours here
-			url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=e5b0597ebdec4794b3ecd610429082abccomp001',
+		    url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?+companyAuthCode='+ Active_Auth,
 			type : 'POST',
 			async : 'async',
 			contentType : "application/json",
@@ -170,8 +188,7 @@ $(document).ready(function() {
 		
 		$('#newprivate').click(function(){
 			$.ajax({
-				//Comapny Auth code  = e5b0597ebdec4794b3ecd610429082abccomp001 // Use yours here
-				url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=e5b0597ebdec4794b3ecd610429082abccomp001',
+				url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode='+ Active_Auth,
 				type : 'POST',
 				async : 'async',
 				contentType : "application/json",
@@ -237,13 +254,13 @@ $(document).ready(function() {
 		    }
 		});
 		
+		
 		$('#custom-validate').click(function(){
 		if ($('#custom-form').valid()){
 			var userresponse = $('#custom-response').val();
 		    var questionid = $('#custom-question').data("qid");
-		    var Auth_code  = 'e5b0597ebdec4794b3ecd610429082abccomp001'; // Use yours here
 		$.ajax({
-			url : 'http://www.cleancaptcha.com/CleanCaptcha/api/validateResponse?companyAuthCode='+Auth_code+'&questionId='+questionid+'&answer='+userresponse,
+			url : 'http://www.cleancaptcha.com/CleanCaptcha/api/validateResponse?companyAuthCode='+Active_Auth+'&questionId='+questionid+'&answer='+userresponse,
 			type : 'POST',
 			async : 'async',
 			contentType : "application/json",
@@ -265,8 +282,7 @@ $(document).ready(function() {
 						$('#custom-response-message').text('Hello Human Being!!!').addClass('green');
 						setTimeout(function(){
 							$.ajax({
-								//Comapny Auth code  = e5b0597ebdec4794b3ecd610429082abccomp001 // Use yours here
-								url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode=e5b0597ebdec4794b3ecd610429082abccomp001',
+								url : 'http://www.cleancaptcha.com/CleanCaptcha/api/getCleanCaptcha/?companyAuthCode='+Active_Auth,
 								type : 'POST',
 								async : 'async',
 								contentType : "application/json",
