@@ -8,7 +8,9 @@ On the other hand, if we take a step back and re think – “Do you really need
 
 Now you might wonder, is this 100% safe, I don’t think so. But do we need to be 100% safe for a site with < 1Mil traffic, site with no profiles or confidential information? This will soother your frustration and will solve the only problem it is intended to solve and nothing else.
 
-Some of the  questions you are seeing are courtesy from various feeds, When you these, please do thank them.
+Some of the  questions you are seeing are courtesy from various feeds, When you use these, please do thank them.
+
+Detailed blog: https://www.linkedin.com/pulse/captcha-war-against-robots-customers-time-venkat-maddali
 
 Web Link: http://cleancaptcha.com/
 
